@@ -1,10 +1,8 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
-  
-  const PaymentScreen({Key? key, required this.title}) : super(key: key);
+  const PaymentScreen({super.key, required this.title});
 
   final String title;
 
@@ -60,10 +58,7 @@ class PaymentScreenState extends State<PaymentScreen> {
       'description': 'Fine T-Shirt',
       'retry': {'enabled': true, 'max_count': 1},
       'send_sms_hash': true,
-      'prefill': {
-        'contact': '8888888888',
-        'email': 'test@razorpay.com'
-      },
+      'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
       'external': {
         'wallets': ['paytm']
       }
