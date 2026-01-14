@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:cx_payment_app/theme/app_theme.dart';
 import 'package:cx_payment_app/widgets/glass_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cx_payment_app/history_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -16,23 +17,84 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _screens = [
     const DashboardContent(),
-    const HistoryScreen(), // Placeholder for other tabs
+    const HistoryScreen(),
     const Center(child: Text("Analytics")),
     const Center(child: Text("Settings")),
   ];
 
   @override
   Widget build(BuildContext context) {
+    // If you want state preservation, use IndexedStack or PageView.
+    // For now, consistent with original intent, we just switch the body.
     return Scaffold(
       backgroundColor: AppTheme.kBackgroundColor,
-      body: _currentIndex == 0
-          ? const DashboardContent()
-          : _screens[_currentIndex], // Simple switching
+      body: SafeArea(child: _screens[_currentIndex]),
       bottomNavigationBar: _buildBottomNavBar(),
     );
   }
 
-  Widget _buildTopBar() {
+  Widget _buildBottomNavBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      color: AppTheme.kSurfaceColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            onPressed: () => setState(() => _currentIndex = 0),
+            icon: Icon(Icons.home_filled,
+                color:
+                    _currentIndex == 0 ? AppTheme.kPrimaryColor : Colors.grey),
+          ),
+          IconButton(
+            onPressed: () => setState(() => _currentIndex = 1),
+            icon: Icon(Icons.history,
+                color:
+                    _currentIndex == 1 ? AppTheme.kPrimaryColor : Colors.grey),
+          ),
+          IconButton(
+            onPressed: () => setState(() => _currentIndex = 2),
+            icon: Icon(Icons.pie_chart_outline,
+                color:
+                    _currentIndex == 2 ? AppTheme.kPrimaryColor : Colors.grey),
+          ),
+          IconButton(
+            onPressed: () => setState(() => _currentIndex = 3),
+            icon: Icon(Icons.settings_outlined,
+                color:
+                    _currentIndex == 3 ? AppTheme.kPrimaryColor : Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DashboardContent extends StatelessWidget {
+  const DashboardContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTopBar(context),
+          const SizedBox(height: 20),
+          _buildBalanceCard(context),
+          const SizedBox(height: 20),
+          _buildActionButtons(context),
+          const SizedBox(height: 20),
+          _buildChartSection(context),
+          const SizedBox(height: 20),
+          _buildRecentTransactions(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -76,7 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildBalanceCard() {
+  Widget _buildBalanceCard(BuildContext context) {
     return GlassCard(
       opacity: 0.05,
       child: Padding(
@@ -138,7 +200,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildActionButtons() {
+  Widget _buildActionButtons(BuildContext context) {
+    // Note: If you want to handle navigation here, you might need Navigator.
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -182,7 +245,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildChartSection() {
+  Widget _buildChartSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -236,7 +299,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildRecentTransactions() {
+  Widget _buildRecentTransactions(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -288,35 +351,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             amount,
             style: TextStyle(
                 color: amountColor, fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      color: AppTheme.kSurfaceColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.home_filled, color: AppTheme.kPrimaryColor),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.account_balance_wallet_outlined,
-                color: Colors.grey),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.pie_chart_outline, color: Colors.grey),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings_outlined, color: Colors.grey),
           ),
         ],
       ),
