@@ -82,7 +82,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               child: Text(
                 period,
                 style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.grey,
+                  color: isSelected ? Colors.black : Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
