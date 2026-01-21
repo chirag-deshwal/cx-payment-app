@@ -1,16 +1,52 @@
-# flutter_application_1
+# CX PAYEMNT APP
+### Crypto Payment App (Flutter)
 
-A new Flutter project.
+A cross-platform cryptocurrency payment application built using **Flutter**, supporting **Web**, **Android**, and **iOS**.  
+The app allows users to securely make and receive payments using **cryptocurrency**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🌐 **Cross-Platform Support**
+  - Flutter Web
+  - Android
+  - iOS
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 💰 **Crypto Payments**
+  - Send and receive payments in cryptocurrency
+  - Secure wallet integration (Upcoming)
+  - Fast and transparent transactions
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 🔐 **Security**
+  - Encrypted transactions
+  - Secure key and wallet handling
+
+- 📱 **Modern UI**
+  - Responsive Flutter UI
+  - Optimized for mobile and web
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** Flutter
+- **Platforms:** Web, Android, iOS
+- **Backend:** (Add backend details if applicable)
+- **Blockchain / Crypto:** (Specify supported coins or networks if available)
+
+---
+
+## 📦 Installation
+
+### Prerequisites
+- Flutter SDK (latest stable)
+- Dart
+- Android Studio / Xcode (for mobile builds)
+- A supported web browser (for Flutter Web)
+
+### Clone the Repository
+```bash
+git clone https://github.com/chirag-deshwal/cx-payment-app.git
+cd cx-payment-app
+
