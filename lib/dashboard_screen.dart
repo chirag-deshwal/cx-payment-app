@@ -4,6 +4,7 @@ import 'package:cx_payment_app/theme/app_theme.dart';
 import 'package:cx_payment_app/widgets/glass_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cx_payment_app/history_screen.dart';
+import 'package:cx_payment_app/analytics_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,7 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _screens = [
     const DashboardContent(),
     const HistoryScreen(),
-    const Center(child: Text("Analytics")),
+    const AnalyticsScreen(),
     const Center(child: Text("Settings")),
   ];
 
