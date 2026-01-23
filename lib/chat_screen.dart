@@ -17,6 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       backgroundColor: Colors.transparent, // Uses main container gradient
       appBar: AppBar(
@@ -104,6 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           _buildInputArea(),
+          SizedBox(height: isKeyboardOpen ? 0 : 110),
         ],
       ),
     );
@@ -111,8 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildInputArea() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(
-          16, 10, 16, 30), // Extra bottom padding for overlap
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E22),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
