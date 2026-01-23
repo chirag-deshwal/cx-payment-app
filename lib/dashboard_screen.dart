@@ -3,6 +3,8 @@ import 'package:cx_payment_app/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cx_payment_app/history_screen.dart';
 import 'package:cx_payment_app/analytics_screen.dart';
+import 'package:cx_payment_app/widgets/deposit_modal.dart';
+import 'package:cx_payment_app/chat_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -16,7 +18,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _screens = [
     const DashboardContent(), // Home
-    const Center(child: Text("Search Screen")), // Placeholder
+    const ChatScreen(), // Chat Screen instead of Search
     const Center(child: Text("Swap Screen")), // Placeholder for center button
     const HistoryScreen(), // Wallets/History
     const AnalyticsScreen(), // Settings/Analytics as placeholder
@@ -62,7 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildNavItem(Icons.home_outlined, 0),
-          _buildNavItem(Icons.search, 1),
+          _buildNavItem(Icons.chat_bubble_outline, 1),
           _buildCenterSwapButton(),
           _buildNavItem(Icons.account_balance_wallet_outlined, 3), // Wallets
           _buildNavItem(Icons.settings_outlined, 4),
@@ -123,7 +125,7 @@ class DashboardContent extends StatelessWidget {
         children: [
           _buildTopBar(),
           const SizedBox(height: 30),
-          _buildBalanceSection(),
+          _buildBalanceSection(context),
           const SizedBox(height: 30),
           _buildWalletCards(),
           const SizedBox(height: 100), // Space for bottom nav
@@ -153,7 +155,7 @@ class DashboardContent extends StatelessWidget {
     );
   }
 
-  Widget _buildBalanceSection() {
+  Widget _buildBalanceSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -194,6 +196,43 @@ class DashboardContent extends StatelessWidget {
             color: Colors.white,
             letterSpacing: -1,
           ),
+        ),
+        const SizedBox(height: 20),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => const DepositModal(),
+                );
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppTheme.kLimeGreen,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.qr_code_scanner,
+                        color: Colors.black, size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Deposit',
+                      style: GoogleFonts.manrope(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
